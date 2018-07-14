@@ -18,13 +18,12 @@ def find_images(path):
 
     directory = os.path.join('plant_disease_detection', path)
     # Options for the GNU and BSD find command
-    extension_list = ['jpg', 'png','JPG','PNG','JPEG', 'ppm', 'PPM', 'bmp', 'BMP']
+    extension_list = ['jpg', 'png', 'JPG', 'PNG', 'JPEG', 'ppm', 'PPM', 'bmp', 'BMP']
     find_options = str.format('-iname "*.{0}"', extension_list[0])
     for i in range(1, len(extension_list)):
         find_options = str.format('{0} -o -iname "*.{1}"', find_options, extension_list[i])
 
     # Find all the images using find command
-    print(str.format('find -L {0} {1}', directory, find_options))
     process = subprocess.Popen([str.format('find -L {0} {1}', directory, find_options),],
                                 stdout=subprocess.PIPE,
                                 shell=True)
