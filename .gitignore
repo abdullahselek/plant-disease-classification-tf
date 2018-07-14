@@ -104,4 +104,4 @@ venv.bak/
 .mypy_cache/
 
 # datasets
-plant-disease-detection/datasets/
+plant_disease_detection/datasets/
