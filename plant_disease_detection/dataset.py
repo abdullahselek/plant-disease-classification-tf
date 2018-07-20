@@ -13,3 +13,11 @@ class DataSet(object):
         self._cls = cls
         self._epochs_done = 0
         self._index_in_epoch = 0
+
+    @property
+    def images(self):
+        return self._images
+
+    @property
+    def labels(self):
+        return self._labels
