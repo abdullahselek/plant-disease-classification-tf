@@ -21,3 +21,11 @@ class DataSet(object):
     @property
     def labels(self):
         return self._labels
+
+    @property
+    def img_names(self):
+        return self._img_names
+
+    @property
+    def cls(self):
+        return self._cls
