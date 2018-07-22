@@ -29,3 +29,11 @@ class DataSet(object):
     @property
     def cls(self):
         return self._cls
+
+    @property
+    def num_examples(self):
+        return self._num_examples
+
+    @property
+    def epochs_done(self):
+        return self._epochs_done
