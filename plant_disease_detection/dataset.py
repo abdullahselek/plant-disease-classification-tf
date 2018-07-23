@@ -37,3 +37,23 @@ class DataSet(object):
     @property
     def epochs_done(self):
         return self._epochs_done
+
+    def next_batch(self, batch_size):
+        """Return the next `batch_size` examples from this data set.
+        Args:
+          batch_size (int):
+            Size of batch.
+        Returns:
+           Tuples of images, labels, image names and class. 
+        """
+
+        start = self._index_in_epoch
+        self._index_in_epoch += batch_size
+        if self._index_in_epoch > self._num_examples:
+            # After each epoch we update this
+            self._epochs_done += 1
+            start = 0
+            self._index_in_epoch = batch_size
+            assert batch_size <= self._num_examples
+        end = self._index_in_epoch
+        return self._images[start:end], self._labels[start:end], self._img_names[start:end], self._cls[start:end]
