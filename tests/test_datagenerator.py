@@ -20,3 +20,10 @@ class DataGeneratorTest(unittest.TestCase):
         self.assertEqual(len(labels), 21917)
         self.assertEqual(len(img_names), 21917)
         self.assertEqual(len(class_array), 21917)
+
+    def test_read_train_sets(self):
+        train_path = os.path.join('plant_disease_detection', 'datasets/train')
+        classes = os.listdir(train_path)
+        data_set = datagenerator.read_train_sets(train_path, 128, classes, 0.2)
+        self.assertIsNotNone(data_set.train)
+        self.assertIsNotNone(data_set.valid)

@@ -5,14 +5,17 @@ import numpy as np
 
 class DataSet(object):
 
-    def __init__(self, images, labels, img_names, cls):
-        self._num_examples = images.shape[0]
-        self._images = images
-        self._labels = labels
-        self._img_names = img_names
-        self._cls = cls
+    def __init__(self, *args):
+        if len(args) > 0:
+            self._num_examples = args[0].shape[0]
+            self._images = args[0]
+            self._labels = args[1]
+            self._img_names = args[2]
+            self._cls = args[3]
         self._epochs_done = 0
         self._index_in_epoch = 0
+        self.train = None
+        self.valid = None
 
     @property
     def images(self):
