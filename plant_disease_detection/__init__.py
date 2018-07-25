@@ -14,5 +14,6 @@ __download_url__ = 'https://github.com/abdullahselek/plant-disease-detection'
 __description__  = 'Disease detection on different plants with Neural Networks.'
 
 from plant_disease_detection import (
-    datagenerator
+    datagenerator,
+    dataset
 )
