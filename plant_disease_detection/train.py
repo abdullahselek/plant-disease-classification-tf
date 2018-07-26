@@ -37,3 +37,29 @@ def create_weights(shape):
 
 def create_biases(size):
     return tf.Variable(tf.constant(0.05, shape=[size]))
+
+def create_convolutional_layer(input,
+                               num_input_channels,
+                               conv_filter_size,
+                               num_filters):
+    # Define the weights that will be trained using create_weights function.
+    weights = create_weights(shape=[conv_filter_size,
+                                    conv_filter_size,
+                                    num_input_channels,
+                                    num_filters])
+    # Create biases using the create_biases function. These are also trained.
+    biases = create_biases(num_filters)
+    # Creating the convolutional layer.
+    layer = tf.nn.conv2d(input=input,
+                         filter=weights,
+                         strides=[1, 1, 1, 1],
+                         padding='SAME')
+    layer += biases
+    # Use max-pooling.
+    layer = tf.nn.max_pool(value=layer,
+                           ksize=[1, 2, 2, 1],
+                           strides=[1, 2, 2, 1],
+                           padding='SAME')
+    # Output of pooling is fed to Relu which is the activation function for us.
+    layer = tf.nn.relu(layer)
+    return layer
