@@ -31,3 +31,6 @@ def get_data():
     print('Number of files in Training-set:\t\t{}'.format(len(data.train.labels)))
     print('Number of files in Validation-set:\t{}'.format(len(data.valid.labels)))
     return data
+
+def create_weights(shape):
+    return tf.Variable(tf.truncated_normal(shape, stddev=0.05))
