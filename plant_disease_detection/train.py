@@ -2,16 +2,29 @@
 # -*- coding: utf-8 -*-
 
 import os
+import tensorflow as tf
+
 from plant_disease_detection import datagenerator
 
+train_path = os.path.join('plant_disease_detection', 'datasets/train')
+classes = os.listdir(train_path)
+num_classes = len(classes)
+
+# 20% of the data will automatically be used for validation
+validation_size = 0.2
+img_size = 128
+num_channels = 3
+
+session = tf.Session()
+x = tf.placeholder(tf.float32,
+                   shape=[None, img_size, img_size, num_channels],
+                   name='x')
+
+# labels
+y_true = tf.placeholder(tf.float32, shape=[None, num_classes], name='y_true')
+y_true_cls = tf.argmax(y_true, dimension=1)
+
 def get_data():
-    train_path = os.path.join('plant_disease_detection', 'datasets/train')
-    classes = os.listdir(train_path)
-
-    # 20% of the data will automatically be used for validation
-    validation_size = 0.2
-    img_size = 128
-
     # Load and read training data
     data = datagenerator.read_train_sets(train_path, img_size, classes, validation_size)
     print('Complete reading input data. Will Now print a snippet of it')
