@@ -63,3 +63,18 @@ def create_convolutional_layer(input,
     # Output of pooling is fed to Relu which is the activation function for us.
     layer = tf.nn.relu(layer)
     return layer
+
+def create_fc_layer(input,
+                    num_inputs,
+                    num_outputs,
+                    use_relu=True):
+    # Define trainable weights and biases.
+    weights = create_weights(shape=[num_inputs, num_outputs])
+    biases = create_biases(num_outputs)
+
+    # Connected layer takes input x and produces wx+b.Since,
+    # these are matrices, we use matmul function in Tensorflow
+    layer = tf.matmul(input, weights) + biases
+    if use_relu:
+        layer = tf.nn.relu(layer)
+    return layer
