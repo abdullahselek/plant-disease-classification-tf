@@ -4,7 +4,7 @@
 import os
 import unittest
 
-from plant_disease_detection import datagenerator
+from plant_disease_classification import datagenerator
 
 class DataGeneratorTest(unittest.TestCase):
 
@@ -13,7 +13,7 @@ class DataGeneratorTest(unittest.TestCase):
         self.assertEqual(len(image_paths), 21917)
 
     def test_load_train_data(self):
-        train_path = os.path.join('plant_disease_detection', 'datasets/train')
+        train_path = os.path.join('plant_disease_classification', 'datasets/train')
         classes = os.listdir(train_path)
         images, labels, img_names, class_array = datagenerator.load_train_data(train_path, 128, classes)
         self.assertEqual(len(images), 21917)
@@ -22,7 +22,7 @@ class DataGeneratorTest(unittest.TestCase):
         self.assertEqual(len(class_array), 21917)
 
     def test_read_train_sets(self):
-        train_path = os.path.join('plant_disease_detection', 'datasets/train')
+        train_path = os.path.join('plant_disease_classification', 'datasets/train')
         classes = os.listdir(train_path)
         data_set = datagenerator.read_train_sets(train_path, 128, classes, 0.2)
         self.assertIsNotNone(data_set.train)

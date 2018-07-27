@@ -4,9 +4,9 @@
 import os
 import tensorflow as tf
 
-from plant_disease_detection import datagenerator
+from plant_disease_classification import datagenerator
 
-train_path = os.path.join('plant_disease_detection', 'datasets/train')
+train_path = os.path.join('plant_disease_classification', 'datasets/train')
 classes = os.listdir(train_path)
 num_classes = len(classes)
 

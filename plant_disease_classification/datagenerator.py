@@ -22,7 +22,7 @@ def find_images(path):
       image_paths (array).
     """
 
-    directory = os.path.join('plant_disease_detection', path)
+    directory = os.path.join('plant_disease_classification', path)
     # Options for the GNU and BSD find command
     extension_list = ['jpg', 'png', 'JPG', 'PNG', 'JPEG', 'ppm', 'PPM', 'bmp', 'BMP']
     find_options = str.format('-iname "*.{0}"', extension_list[0])
