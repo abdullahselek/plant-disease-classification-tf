@@ -90,3 +90,8 @@ filter_size_conv3 = 3
 num_filters_conv3 = 64
 
 fc_layer_size = 128
+
+layer_conv1 = create_convolutional_layer(input=x,
+                                         num_input_channels=num_channels,
+                                         conv_filter_size=filter_size_conv1,
+                                         num_filters=num_filters_conv1)
