@@ -95,3 +95,13 @@ layer_conv1 = create_convolutional_layer(input=x,
                                          num_input_channels=num_channels,
                                          conv_filter_size=filter_size_conv1,
                                          num_filters=num_filters_conv1)
+
+layer_conv2 = create_convolutional_layer(input=layer_conv1,
+                                         num_input_channels=num_filters_conv1,
+                                         conv_filter_size=filter_size_conv2,
+                                         num_filters=num_filters_conv2)
+
+layer_conv3= create_convolutional_layer(input=layer_conv2,
+                                        num_input_channels=num_filters_conv2,
+                                        conv_filter_size=filter_size_conv3,
+                                        num_filters=num_filters_conv3)
