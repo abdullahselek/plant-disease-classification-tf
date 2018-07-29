@@ -34,7 +34,6 @@ def get_data():
 
 def create_weights(shape):
     return tf.Variable(tf.truncated_normal(shape, stddev=0.05))
-
 def create_biases(size):
     return tf.Variable(tf.constant(0.05, shape=[size]))
 
@@ -77,6 +76,19 @@ def create_fc_layer(input,
     layer = tf.matmul(input, weights) + biases
     if use_relu:
         layer = tf.nn.relu(layer)
+    return layer
+
+def create_flatten_layer(layer):
+    # The shape of the layer will be [batch_size img_size img_size num_channels]
+    # But let's get it from the previous layer.
+    layer_shape = layer.get_shape()
+
+    # Number of features will be img_height * img_width* num_channels.
+    # Calculate it in place of hard-coding it.
+    num_features = layer_shape[1:4].num_elements()
+
+    # Now, flatten the layer so we shall have to reshape to num_features
+    layer = tf.reshape(layer, [-1, num_features])
     return layer
 
 # Network graph params
