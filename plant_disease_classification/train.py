@@ -129,3 +129,17 @@ layer_fc2 = create_fc_layer(input=layer_fc1,
                             num_inputs=fc_layer_size,
                             num_outputs=num_classes,
                             use_relu=False)
+
+y_pred = tf.nn.softmax(layer_fc2,name='y_pred')
+
+y_pred_cls = tf.argmax(y_pred, dimension=1)
+session.run(tf.global_variables_initializer())
+cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=layer_fc2,
+                                                        labels=y_true)
+
+cost = tf.reduce_mean(cross_entropy)
+optimizer = tf.train.AdamOptimizer(learning_rate=1e-4).minimize(cost)
+correct_prediction = tf.equal(y_pred_cls, y_true_cls)
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+
+session.run(tf.global_variables_initializer())
