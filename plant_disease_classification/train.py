@@ -15,6 +15,12 @@ validation_size = 0.2
 img_size = 128
 num_channels = 3
 
+batch_size = 32
+
+# Load all the training and validation images and labels into memory
+# using openCV and use that during training
+data = get_data()
+
 session = tf.Session()
 x = tf.placeholder(tf.float32,
                    shape=[None, img_size, img_size, num_channels],
@@ -149,3 +155,29 @@ def show_progress(epoch, feed_dict_train, feed_dict_validate, val_loss):
     val_acc = session.run(accuracy, feed_dict=feed_dict_validate)
     msg = "Training Epoch {0} --- Training Accuracy: {1:>6.1%}, Validation Accuracy: {2:>6.1%},  Validation Loss: {3:.3f}"
     print(msg.format(epoch + 1, acc, val_acc, val_loss))
+
+total_iterations = 0
+
+saver = tf.train.Saver()
+
+def train(num_iteration):
+    global total_iterations
+
+    for i in range(total_iterations, total_iterations + num_iteration):
+        x_batch, y_true_batch, _, cls_batch = data.train.next_batch(batch_size)
+        x_valid_batch, y_valid_batch, _, valid_cls_batch = data.valid.next_batch(batch_size)
+
+        feed_dict_tr = {x: x_batch,
+                           y_true: y_true_batch}
+        feed_dict_val = {x: x_valid_batch,
+                              y_true: y_valid_batch}
+        session.run(optimizer, feed_dict=feed_dict_tr)
+
+        if i % int(data.train.num_examples / batch_size) == 0:
+            val_loss = session.run(cost, feed_dict=feed_dict_val)
+            epoch = int(i / int(data.train.num_examples / batch_size))
+            show_progress(epoch, feed_dict_tr, feed_dict_val, val_loss)
+            saver.save(session, 'plants-disease-model')
+    total_iterations += num_iteration
+
+train(num_iteration=3000)
