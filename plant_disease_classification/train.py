@@ -139,8 +139,8 @@ y_pred = tf.nn.softmax(layer_fc2,name='y_pred')
 
 y_pred_cls = tf.argmax(y_pred, dimension=1)
 session.run(tf.global_variables_initializer())
-cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=layer_fc2,
-                                                        labels=y_true)
+cross_entropy = tf.nn.softmax_cross_entropy_with_logits_v2(logits=layer_fc2,
+                                                           labels=y_true)
 
 cost = tf.reduce_mean(cross_entropy)
 optimizer = tf.train.AdamOptimizer(learning_rate=1e-4).minimize(cost)
