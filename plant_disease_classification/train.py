@@ -3,8 +3,7 @@
 
 import os
 import tensorflow as tf
-
-from plant_disease_classification import datagenerator
+import datagenerator
 
 train_path = os.path.join('plant_disease_classification', 'datasets/train')
 classes = os.listdir(train_path)

@@ -9,7 +9,7 @@ import numpy as np
 import glob
 
 from sklearn.utils import shuffle
-from .dataset import DataSet
+from dataset import DataSet
 
 def find_images(path):
     """

@@ -17,4 +17,4 @@ from plant_disease_classification import (
     datagenerator
 )
 
-from .dataset import DataSet
+from plant_disease_classification.dataset import DataSet
