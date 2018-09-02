@@ -16,15 +16,6 @@ num_channels = 3
 
 batch_size = 32
 
-# Load all the training and validation images and labels into memory
-# using openCV and use that during training
-data = get_data()
-
-session = tf.Session()
-x = tf.placeholder(tf.float32,
-                   shape=[None, img_size, img_size, num_channels],
-                   name='x')
-
 # labels
 y_true = tf.placeholder(tf.float32, shape=[None, num_classes], name='y_true')
 y_true_cls = tf.argmax(y_true, dimension=1)
@@ -36,6 +27,15 @@ def get_data():
     print('Number of files in Training-set:\t\t{}'.format(len(data.train.labels)))
     print('Number of files in Validation-set:\t{}'.format(len(data.valid.labels)))
     return data
+
+# Load all the training and validation images and labels into memory
+# using openCV and use that during training
+data = get_data()
+
+session = tf.Session()
+x = tf.placeholder(tf.float32,
+                   shape=[None, img_size, img_size, num_channels],
+                   name='x')
 
 def create_weights(shape):
     return tf.Variable(tf.truncated_normal(shape, stddev=0.05))
