@@ -157,6 +157,10 @@ def show_progress(epoch, feed_dict_train, feed_dict_validate, val_loss):
 
 total_iterations = 0
 
+save_path = 'plant_disease_classification/model'
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
+
 saver = tf.train.Saver()
 
 def train(num_iteration):
@@ -176,7 +180,7 @@ def train(num_iteration):
             val_loss = session.run(cost, feed_dict=feed_dict_val)
             epoch = int(i / int(data.train.num_examples / batch_size))
             show_progress(epoch, feed_dict_tr, feed_dict_val, val_loss)
-            saver.save(session, 'plants-disease-model')
+            saver.save(session, os.path.join(save_path, 'plants-disease-model'))
     total_iterations += num_iteration
 
 train(num_iteration=3000)
