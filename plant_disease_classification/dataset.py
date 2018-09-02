@@ -6,7 +6,7 @@ import numpy as np
 class DataSet(object):
 
     def __init__(self, *args):
-        if len(args) > 4:
+        if len(args) > 3:
             self._num_examples = args[0].shape[0]
             self._images = args[0]
             self._labels = args[1]
