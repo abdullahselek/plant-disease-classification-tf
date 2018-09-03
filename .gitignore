@@ -105,3 +105,6 @@ venv.bak/
 
 # datasets
 plant_disease_classification/datasets/
+
+# tensor model
+plant_disease_classification/model/
