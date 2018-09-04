@@ -15,7 +15,7 @@ A Convolutional Neural Network with TensorFlow and OpenCV using a dataset that c
 Call **trian.py** with `train` method with training and tests datasets.
 
 ```
-python plant_disease_classification/train.py --train plant_disease_classification/datasets/train --val plant_disease_classification/datasets/test --num_classes 2
+python plant_disease_classification/train.py --train plant_disease_classification/datasets/train --val plant_disease_classification/datasets/test --num_classes 38
 ```
 
 ## Model
