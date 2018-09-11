@@ -30,3 +30,6 @@ def predict(filename):
     x= graph.get_tensor_by_name("x:0")
     y_true = graph.get_tensor_by_name("y_true:0")
     y_test_images = np.zeros((1, 2))
+    feed_dict_testing = {x: x_batch, y_true: y_test_images}
+    result = session.run(y_pred, feed_dict=feed_dict_testing)
+    print(result)
