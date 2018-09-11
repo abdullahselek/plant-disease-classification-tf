@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import cv2
 import numpy as np
 import tensorflow as tf
@@ -8,9 +9,11 @@ import tensorflow as tf
 image_size = 128
 num_channels = 3
 
+graph_path = os.path.join('plant_disease_classification/model/', 'plants-disease-model.meta')
+
 session = tf.Session()
-saver = tf.train.import_meta_graph('plants-disease-model.meta')
-saver.restore(session, tf.train.latest_checkpoint('./'))
+saver = tf.train.import_meta_graph(graph_path)
+saver.restore(session, tf.train.latest_checkpoint('plant_disease_classification/model/'))
 
 def predict(filename):
     images = []
