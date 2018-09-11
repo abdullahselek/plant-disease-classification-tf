@@ -6,6 +6,7 @@ import numpy as np
 import tensorflow as tf
 
 image_size = 128
+num_channels = 3
 
 session = tf.Session()
 saver = tf.train.import_meta_graph('plants-disease-model.meta')
@@ -21,3 +22,11 @@ def predict(filename):
     images = np.array(images, dtype=np.uint8)
     images = images.astype('float32')
     images = np.multiply(images, 1.0 / 255.0)
+    # The input to the network is of shape [None image_size image_size num_channels]. Hence we reshape.
+    x_batch = images.reshape(1, image_size, image_size, num_channels)
+    graph = tf.get_default_graph()
+    y_pred = graph.get_tensor_by_name("y_pred:0")
+    # Let's feed the images to the input placeholders
+    x= graph.get_tensor_by_name("x:0")
+    y_true = graph.get_tensor_by_name("y_true:0")
+    y_test_images = np.zeros((1, 2))
