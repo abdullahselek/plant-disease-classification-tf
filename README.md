@@ -25,3 +25,11 @@ python plant_disease_classification/train.py --train plant_disease_classificatio
 ## Model
 
 After successfull training, model is created under **plant_disease_classification/model/** folder.
+
+## Prediction
+
+Call `predict` function of **predict.py** with selected image file path. Below there is sample command for CLI for default image path.
+
+```
+python plant_disease_classification/predict.py --predict
+```
