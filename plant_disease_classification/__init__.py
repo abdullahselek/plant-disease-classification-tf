@@ -14,7 +14,8 @@ __download_url__ = 'https://github.com/abdullahselek/plant-disease-classificatio
 __description__  = 'Disease classification on different plants with Neural Networks.'
 
 from plant_disease_classification import (
-    datagenerator
+    datagenerator,
+    predict
 )
 
 from plant_disease_classification.dataset import DataSet
