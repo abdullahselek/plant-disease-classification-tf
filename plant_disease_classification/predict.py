@@ -15,7 +15,7 @@ session = tf.Session()
 saver = tf.train.import_meta_graph(graph_path)
 saver.restore(session, tf.train.latest_checkpoint('plant_disease_classification/model/'))
 
-def predict(filename):
+def predict(filename='plant_disease_classification/datasets/test/0a02f9b47e8082558fa257092f0cedee.jpg'):
     images = []
     image = cv2.imread(filename)
     # Resizing the image to our desired size and
