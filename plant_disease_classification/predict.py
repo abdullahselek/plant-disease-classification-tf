@@ -15,9 +15,10 @@ session = tf.Session()
 saver = tf.train.import_meta_graph(graph_path)
 saver.restore(session, tf.train.latest_checkpoint('plant_disease_classification/model/'))
 
-def predict(filename='plant_disease_classification/datasets/test/0a02f9b47e8082558fa257092f0cedee.jpg'):
+def predict(file_path='plant_disease_classification/datasets/test/0a02f9b47e8082558fa257092f0cedee.jpg'):
+    print(file_path)
     images = []
-    image = cv2.imread(filename)
+    image = cv2.imread(file_path)
     # Resizing the image to our desired size and
     # preprocessing will be done exactly as done during training
     image = cv2.resize(image, (image_size, image_size), cv2.INTER_LINEAR)
@@ -36,3 +37,5 @@ def predict(filename='plant_disease_classification/datasets/test/0a02f9b47e80825
     feed_dict_testing = {x: x_batch, y_true: y_test_images}
     result = session.run(y_pred, feed_dict=feed_dict_testing)
     print(result)
+
+predict()
