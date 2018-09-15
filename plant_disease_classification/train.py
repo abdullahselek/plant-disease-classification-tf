@@ -182,5 +182,3 @@ def train(num_iteration):
             show_progress(epoch, feed_dict_tr, feed_dict_val, val_loss)
             saver.save(session, os.path.join(save_path, 'plants-disease-model'))
     total_iterations += num_iteration
-
-train(num_iteration=3000)
