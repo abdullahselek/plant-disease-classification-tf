@@ -5,6 +5,7 @@ import sys
 import click
 
 from plant_disease_classification import (
+    __version__,
     datagenerator,
     predict
 )
@@ -22,3 +23,5 @@ help_message = '''
     $ python plant_disease_classification --predict
     $ python plant_disease_classification --version
 '''
+
+plant_disease_classification_version = __version__
