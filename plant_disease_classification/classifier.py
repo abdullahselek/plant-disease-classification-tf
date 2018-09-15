@@ -15,7 +15,7 @@ session = tf.Session()
 saver = tf.train.import_meta_graph(graph_path)
 saver.restore(session, tf.train.latest_checkpoint('plant_disease_classification/model/'))
 
-def predict(file_path='plant_disease_classification/datasets/test/0a02f9b47e8082558fa257092f0cedee.jpg'):
+def classify(file_path='plant_disease_classification/datasets/test/0a02f9b47e8082558fa257092f0cedee.jpg'):
     print(file_path)
     images = []
     image = cv2.imread(file_path)
@@ -37,5 +37,3 @@ def predict(file_path='plant_disease_classification/datasets/test/0a02f9b47e8082
     feed_dict_testing = {x: x_batch, y_true: y_test_images}
     result = session.run(y_pred, feed_dict=feed_dict_testing)
     print(result)
-
-predict()

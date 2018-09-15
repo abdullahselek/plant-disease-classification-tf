@@ -15,7 +15,7 @@ __description__  = 'Disease classification on different plants with Neural Netwo
 
 from plant_disease_classification import (
     datagenerator,
-    predict
+    classifier
 )
 
 from plant_disease_classification.dataset import DataSet
