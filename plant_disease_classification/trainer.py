@@ -16,9 +16,11 @@ num_channels = 3
 
 batch_size = 32
 
-# labels
-y_true = tf.placeholder(tf.float32, shape=[None, num_classes], name='y_true')
-y_true_cls = tf.argmax(y_true, dimension=1)
+def create_y_true():
+    # labels
+    y_true = tf.placeholder(tf.float32, shape=[None, num_classes], name='y_true')
+    y_true_cls = tf.argmax(y_true, dimension=1)
+    return y_true, y_true_cls
 
 def get_data():
     # Load and read training data
@@ -139,6 +141,9 @@ y_pred = tf.nn.softmax(layer_fc2,name='y_pred')
 
 y_pred_cls = tf.argmax(y_pred, dimension=1)
 session.run(tf.global_variables_initializer())
+
+y_true, y_true_cls = create_y_true()
+
 cross_entropy = tf.nn.softmax_cross_entropy_with_logits_v2(logits=layer_fc2,
                                                            labels=y_true)
 
