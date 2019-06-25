@@ -104,4 +104,4 @@ venv.bak/
 .mypy_cache/
 
 # tensor model
-plant_disease_classification/model/
+plant_disease_classification/ckpts/

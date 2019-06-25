@@ -165,7 +165,7 @@ def show_progress(epoch, feed_dict_train, feed_dict_validate, val_loss):
 
 total_iterations = 0
 
-save_path = 'plant_disease_classification/model'
+save_path = 'plant_disease_classification/ckpts'
 if not os.path.exists(save_path):
     os.makedirs(save_path)
 

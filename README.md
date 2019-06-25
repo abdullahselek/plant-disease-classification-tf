@@ -12,10 +12,10 @@ A Convolutional Neural Network with TensorFlow and OpenCV using a dataset that c
 
 ## Training
 
-Call **train.py** with `train` method with training and tests datasets.
+Call **trainer.py** with `train` method with training and tests datasets.
 
 ```
-python plant_disease_classification/train.py --train plant_disease_classification/datasets/train --val plant_disease_classification/datasets/test --num_classes 38
+python plant_disease_classification/trainer.py --train plant_disease_classification/datasets/train --val plant_disease_classification/datasets/test --num_classes 38
 ```
 
 <p align="center">
@@ -24,12 +24,12 @@ python plant_disease_classification/train.py --train plant_disease_classificatio
 
 ## Model
 
-After successfull training, model is created under **plant_disease_classification/model/** folder.
+After successfull training, model is created under **plant_disease_classification/ckpts/** folder.
 
 ## Prediction
 
-Call `predict` function of **predict.py** with selected image file path. Below there is sample command for CLI for default image path.
+Call `classify` function of **classifier.py** with selected image file path. Below there is sample command for CLI for default image path.
 
 ```
-python plant_disease_classification/predict.py --predict
+python plant_disease_classification/classifier.py --predict
 ```

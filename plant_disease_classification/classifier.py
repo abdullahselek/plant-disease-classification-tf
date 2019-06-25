@@ -6,14 +6,19 @@ import cv2
 import numpy as np
 import tensorflow as tf
 
+# Just disables the warning, doesn't enable AVX/FMA
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 image_size = 128
 num_channels = 3
 
-graph_path = os.path.join('plant_disease_classification/model/', 'plants-disease-model.meta')
+graph_path = os.path.join('plant_disease_classification/ckpts/', 'plants-disease-model.meta')
+checkpoint_path = os.path.join('plant_disease_classification/ckpts/', 'plants-disease-model')
 
-session = tf.Session()
-saver = tf.train.import_meta_graph(graph_path)
-saver.restore(session, tf.train.latest_checkpoint('plant_disease_classification/model/'))
+session = tf.compat.v1.Session()
+saver = tf.compat.v1.train.import_meta_graph(graph_path)
+saver.restore(session, tf.train.latest_checkpoint('plant_disease_classification/ckpts/'))
+# saver.restore(session, checkpoint_path)
 
 def classify(file_path='plant_disease_classification/datasets/test/0a02f9b47e8082558fa257092f0cedee.jpg'):
     print(file_path)
