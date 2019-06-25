@@ -103,8 +103,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# datasets
-plant_disease_classification/datasets/
-
 # tensor model
 plant_disease_classification/model/
