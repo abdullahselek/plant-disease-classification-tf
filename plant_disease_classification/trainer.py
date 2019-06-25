@@ -5,6 +5,9 @@ import os
 import tensorflow as tf
 import datagenerator
 
+# Just disables the warning, doesn't enable AVX/FMA
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 train_path = os.path.join('plant_disease_classification', 'datasets/train')
 classes = os.listdir(train_path)
 num_classes = len(classes)
@@ -18,8 +21,8 @@ batch_size = 32
 
 def create_y_true():
     # labels
-    y_true = tf.placeholder(tf.float32, shape=[None, num_classes], name='y_true')
-    y_true_cls = tf.argmax(y_true, dimension=1)
+    y_true = tf.compat.v1.placeholder(tf.float32, shape=[None, num_classes], name='y_true')
+    y_true_cls = tf.math.argmax(y_true, axis=1)
     return y_true, y_true_cls
 
 def get_data():
@@ -34,13 +37,13 @@ def get_data():
 # using openCV and use that during training
 data = get_data()
 
-session = tf.Session()
-x = tf.placeholder(tf.float32,
-                   shape=[None, img_size, img_size, num_channels],
-                   name='x')
+session = tf.compat.v1.Session()
+x = tf.compat.v1.placeholder(tf.float32,
+                             shape=[None, img_size, img_size, num_channels],
+                             name='x')
 
 def create_weights(shape):
-    return tf.Variable(tf.truncated_normal(shape, stddev=0.05))
+    return tf.Variable(tf.random.truncated_normal(shape, stddev=0.05))
 def create_biases(size):
     return tf.Variable(tf.constant(0.05, shape=[size]))
 
@@ -62,10 +65,10 @@ def create_convolutional_layer(input,
                          padding='SAME')
     layer += biases
     # Use max-pooling.
-    layer = tf.nn.max_pool(value=layer,
-                           ksize=[1, 2, 2, 1],
-                           strides=[1, 2, 2, 1],
-                           padding='SAME')
+    layer = tf.nn.max_pool2d(input=layer,
+                             ksize=[1, 2, 2, 1],
+                             strides=[1, 2, 2, 1],
+                             padding='SAME')
     # Output of pooling is fed to Relu which is the activation function for us.
     layer = tf.nn.relu(layer)
     return layer
@@ -139,8 +142,8 @@ layer_fc2 = create_fc_layer(input=layer_fc1,
 
 y_pred = tf.nn.softmax(layer_fc2,name='y_pred')
 
-y_pred_cls = tf.argmax(y_pred, dimension=1)
-session.run(tf.global_variables_initializer())
+y_pred_cls = tf.math.argmax(y_pred, axis=1)
+session.run(tf.compat.v1.global_variables_initializer())
 
 y_true, y_true_cls = create_y_true()
 
@@ -148,11 +151,11 @@ cross_entropy = tf.nn.softmax_cross_entropy_with_logits_v2(logits=layer_fc2,
                                                            labels=y_true)
 
 cost = tf.reduce_mean(cross_entropy)
-optimizer = tf.train.AdamOptimizer(learning_rate=1e-4).minimize(cost)
+optimizer = tf.compat.v1.train.AdamOptimizer(learning_rate=1e-4).minimize(cost)
 correct_prediction = tf.equal(y_pred_cls, y_true_cls)
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-session.run(tf.global_variables_initializer())
+session.run(tf.compat.v1.global_variables_initializer())
 
 def show_progress(epoch, feed_dict_train, feed_dict_validate, val_loss):
     acc = session.run(accuracy, feed_dict=feed_dict_train)
@@ -166,7 +169,7 @@ save_path = 'plant_disease_classification/model'
 if not os.path.exists(save_path):
     os.makedirs(save_path)
 
-saver = tf.train.Saver()
+saver = tf.compat.v1.train.Saver()
 
 def train(num_iteration):
     global total_iterations
@@ -187,3 +190,5 @@ def train(num_iteration):
             show_progress(epoch, feed_dict_tr, feed_dict_val, val_loss)
             saver.save(session, os.path.join(save_path, 'plants-disease-model'))
     total_iterations += num_iteration
+
+train(num_iteration=3000)
