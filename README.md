@@ -26,10 +26,10 @@ python plant_disease_classification/trainer.py --train plant_disease_classificat
 
 After successfull training, model is created under **plant_disease_classification/ckpts/** folder.
 
-## Prediction
+## Classification
 
 Call `classify` function of **classifier.py** with selected image file path. Below there is sample command for CLI for default image path.
 
 ```
-python plant_disease_classification/classifier.py --predict
+python plant_disease_classification/classifier.py --classify
 ```
