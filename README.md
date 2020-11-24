@@ -33,3 +33,11 @@ Call `classify` function of **classifier.py** with selected image file path. Bel
 ```
 python plant_disease_classification/classifier.py --classify
 ```
+
+## PyTorch Version
+
+Another version of this project which uses PyTorch and same datasets is available [https://github.com/abdullahselek/plant-disease-classification-pytorch](https://github.com/abdullahselek/plant-disease-classification-pytorch).
+
+## License
+
+[MIT License](https://github.com/abdullahselek/plant-disease-classification-pytorch/blob/master/LICENSE)
