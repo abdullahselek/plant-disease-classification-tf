@@ -36,7 +36,7 @@ python plant_disease_classification/classifier.py --classify
 
 ## PyTorch Version
 
-Another version of this project which uses PyTorch and same datasets is available [https://github.com/abdullahselek/plant-disease-classification-pytorch](https://github.com/abdullahselek/plant-disease-classification-pytorch).
+Another version of this project which is implemented using PyTorch and same datasets is available [https://github.com/abdullahselek/plant-disease-classification-pytorch](https://github.com/abdullahselek/plant-disease-classification-pytorch).
 
 ## License
 
